@@ -1,0 +1,88 @@
+cn/about.html:
+  - Tuyet Vu 博士
+  - PoSSUM（OPS 104）：轨道力学与任务模拟
+  - 💻 数学建模、逻辑推理与 MATLAB 实现
+  - 学术主页 — Tuyet Vu
+  - 🏅 拉筹伯大学 C.J. Eliezer 数学奖
+  - 🎓 墨尔本大学国际学费减免奖学金（MIFRS）— 博士
+  - 🎓 澳大利亚国家 ICT 研究奖学金（NICTA）— 博士
+  - 🎓 亚洲开发银行（ADB）奖学金
+
+cn/booking.html:
+  - {{ site.data.site.email }}
+  - 今后如需改用 Calendly、TidyCal 或其他预约系统，也可以在不改变当前页面结构的前提下进行替换。
+
+cn/contact.html:
+  - 。在 iPad 上，如您愿意，也可以使用 邮箱 按钮。
+  - 。在 iPad 上，如果您愿意，也可以使用 邮箱 按钮。
+
+cn/demo/11-12/index.html:
+  - 请输入信息，选择 一年级1 or 12, 然后点击
+  - Shift+回车键
+  - Ctrl/Cmd+回车键
+  - Tip: Try to finish any unanswered questions, 然后点击
+  - 魔法数学大师’s internal records (在线表格)
+  - 所使用的示范/页面（页面 URL）
+  - Disclaimer:
+  - This is educational maths only and is 临床或用药建议.
+  - This short demo is 考试。它帮助我们规划平和、能建立信心的课程。
+
+cn/demo/3-6/index.html:
+  - Shift+回车键
+  - Ctrl/Cmd+回车键
+  - Tip: Try to finish any unanswered questions, 然后点击
+  - 魔法数学大师’s internal records (在线表格)
+  - 所使用的示范/页面（页面 URL）
+  - This short demo is 考试。它帮助我们规划平和、能建立信心的课程。
+
+cn/demo/7-10/index.html:
+  - Shift+回车键
+  - Ctrl/Cmd+回车键
+  - Tip: Try to finish any unanswered questions, 然后点击
+  - 魔法数学大师’s internal records (在线表格)
+  - 所使用的示范/页面（页面 URL）
+  - This short demo is 考试。它帮助我们规划平和、能建立信心的课程。
+
+cn/demo/prep-2/index.html:
+  - = 检查, then
+  - Shift+回车键
+  - Ctrl/Cmd+回车键
+  - 魔法数学大师’s internal records (在线表格)
+  - 所使用的示范/页面（页面 URL）
+  - 咨询 or register →
+  - This short demo is 考试。它帮助我们规划平和、能建立信心的课程。
+
+cn/index.html:
+  - NAPLAN · 学校考试 · 拓展课程
+  - {% include home-demo-showcase-cn.html %}
+  - NAPLAN 支持与考试技巧
+  - Tuyet Vu 博士
+  - 她在 STEM 教育与行业中拥有数十年经验，因此既了解数学如何在真实世界中应用，也明白孩子们最适合怎样学习。
+
+cn/one-to-one.html:
+  - 准备 NAPLAN、选拔考试或 VCE 的学生
+
+cn/philosophy.html:
+  - — 数学支持 STEM、商业、设计、数据分析和生活中的各种选择。
+
+cn/policies.html:
+  - 课堂行为 & wellbeing
+  - 练习 & progress
+  - Communication & privacy
+
+cn/pricing.html:
+  - 请选择年级、VCE 科目（如适用）和课程类型。所有价格均按每位学生计算。
+  - 11–12年级（VCE）
+  - VCE 科目
+  - VCE 科目会在基础收费上增加相应要求。
+  - AMC/AMO
+  - AMO 强化
+  - Tuyet Vu 博士
+
+cn/programs.html:
+  - 适合想挑战 AMC/AMO 风格问题的学生。我们训练解题策略、耐力与清晰表达。
+  - AMC/AMO 方向
+  - AMC/AMO
+
+cn/register.html:
+  - 魔法数学大师（Tuyet Vu 博士）的正式报名表。

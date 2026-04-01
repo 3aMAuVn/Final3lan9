@@ -1,0 +1,18 @@
+Custom-domain styling fix for www.magicmathmaster.com.au
+
+What was fixed:
+- shared CSS now loads with a page-relative path
+- shared JS now loads with a page-relative path
+- shared topbar logo and flag assets now load with page-relative paths
+- compiled CSS is also inlined in head as a fallback, so the site keeps its styling even if the CSS file path is delayed after a custom-domain switch
+- English language switch default uses a globe icon
+- Spanish and Hindi options are removed from the header language menu
+
+Recommended after upload:
+1. Push these files to the GitHub Pages repo
+2. Confirm CNAME is exactly:
+   www.magicmathmaster.com.au
+3. In GitHub Pages settings, set the custom domain to:
+   www.magicmathmaster.com.au
+4. Trigger a fresh deploy
+5. Hard refresh the browser
