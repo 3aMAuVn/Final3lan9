@@ -1,0 +1,869 @@
+---
+layout: page
+title: 示范测试：学前班至二年级
+description: Short animal-themed maths demo for 学前班 to 二年级.
+lang: zh
+nav_key: main_cn
+body_class: page-demo page-demo-prep-2 page-cn
+permalink: /cn/demo/prep-2//
+---
+<div class="card">
+
+ <div id="pill" class="pill">🌱 学前班–二年级 • 动物</div>
+ <h1 id="titleH1">动物数学练习 (免费示范测试)</h1>
+
+ <p class="intro">
+ 请输入答案，先点击<b>检查</b>，再点击<b>下一题</b>。
+ <span class="note">
+  键盘快捷键： <b>回车键</b> ＝ 检查，然后 <b>回车键</b> 再次按下 = 下一题 • <b>组合键回车</b> = 上一题 • <b>快捷键回车</b> = 下一题 （跳过检查）
+ </span>
+ </p>
+
+ <!-- START -->
+ <div id="startMsg" class="q">请输入信息，选择 学前班/一年级/二年级, 然后点击 <b>开始</b> 🐾</div>
+
+ <div id="profileBox">
+ <div class="row2">
+  <div class="field">
+  <label>学生姓名</label>
+  <input id="studentName" placeholder="e.g., Anna">
+  </div>
+
+  <div class="field">
+  <label>年级</label>
+  <select id="studentGrade">
+   <option value="">请选择…</option>
+   <option>学前班</option>
+   <option>一年级</option>
+   <option>二年级</option>
+  </select>
+  <div class="note" id="gradeHint" style="margin-top:8px;">请选择学前班、一年级或二年级。</div>
+  </div>
+ </div>
+
+ <div class="note">
+  这个简短的示范测试帮助我们了解孩子的思考方式。此页面不会收集电子邮箱或电话号码。
+ </div>
+ </div>
+
+ <div id="startButtons" class="btnrow">
+ <button id="startBtn" onclick="start()" disabled>开始</button>
+ <button class="secondary" onclick="goTo示范首页()">返回免费示范测试</button>
+ </div>
+
+ <!-- QUIZ -->
+ <div id="qa" class="hide">
+ <div id="qCounter" class="note" style="margin-top:0; font-weight:900; color:#334155;"></div>
+ <div id="q" class="q"></div>
+
+ <input id="ans" inputmode="decimal" placeholder="Type a number">
+
+ <div id="precisionNote" class="note" style="margin-top:8px;"></div>
+
+ <div class="note" style="margin-top:10px;">
+  <b>提示：</b>您可以先按<b>下一题</b>跳过，之后再用<b>上一题</b>回来。<br>
+  <b>完成：</b>您可以随时点击<b>完成</b>查看结果。
+ </div>
+
+ <div class="btnrow">
+  <button id="checkBtn" onclick="check()">检查</button>
+  <button id="prevBtn" class="secondary" onclick="prev()" disabled>上一题</button>
+  <button id="nextBtn" class="secondary" onclick="next()">下一题</button>
+  <button id="finishBtn" class="secondary" onclick="finishEarly()">完成</button>
+  <button class="secondary" onclick="backToGrade()">更换年级</button>
+  <button class="secondary" onclick="goTo示范首页()">返回免费示范测试</button>
+ </div>
+ </div>
+
+ <div id="fb"></div>
+ <div id="hint" class="hint"></div>
+
+ <!-- END / RESULTS -->
+ <div id="end" class="cta hide">
+ <div id="finalLine"></div>
+
+ <div class="resultBox">
+  <div class="resultTitle">结果概览</div>
+  <div id="pctText"></div>
+  <canvas id="chart" width="900" height="260"></canvas>
+  <div class="note">蓝色 = 正确（✔）• 红色 = 错误（✘）• 灰色边框 = 未作答（U）</div>
+ </div>
+
+ <div class="resultBox">
+  <div class="resultTitle">🧑‍🎓 学生总结</div>
+
+  <p id="studentOverview" style="margin:0 0 10px;"></p>
+
+  <p style="margin:0;"><b>✅ 做得好的地方：</b></p>
+  <ul id="studentWellList"></ul>
+
+  <p style="margin:10px 0 0;"><b>🎯 下一步要练习的内容：</b></p>
+  <ul id="student下一题List"></ul>
+ </div>
+
+ <div class="resultBox">
+  <div class="resultTitle">👨‍👩‍👧 家长总结</div>
+
+  <p id="parentOverview"></p>
+  <p><b>未作答题目：</b> <span id="unansweredLine"></span></p>
+
+  <p><b>孩子做得好的地方：</b></p>
+  <ul id="strengthList"></ul>
+
+  <p><b>下一步建议练习：</b></p>
+  <ul id="nextList"></ul>
+
+  <p class="note">
+  这个示范并不是考试。它帮助我们规划平和、能建立信心的课程。
+  </p>
+ </div>
+
+ <div class="toggleRow">
+  <input id="includeReport" type="checkbox" checked>
+  <label for="includeReport">包含可打印报告</label>
+ </div>
+
+ <div class="btnrow">
+  <button onclick="printOrSkip()">🖨️ 打印 / 保存报告</button>
+  <button class="secondary" onclick="restart()">再试一次</button>
+  <button class="secondary" onclick="backToGrade()">更换年级</button>
+  <button class="secondary" onclick="goTo示范首页()">返回免费示范测试</button>
+ </div>
+
+ <div id="saveStatus" class="note"></div>
+
+ <details class="note" style="margin-top:10px;">
+  <summary style="cursor:pointer; font-weight:900; color:#334155;">
+  隐私与保存内容（点击查看）
+  </summary>
+  <div style="margin-top:8px; color:#64748b; font-weight:650; line-height:1.6;">
+  <p style="margin:0 0 8px;">
+   这个示范测试可以将结果保存到 <b>魔法数学大师的内部记录（在线表格）</b> 以便我们查看进度。
+   <b>此页面不会发送电子邮件</b> 
+  </p>
+  <p style="margin:0 0 6px;"><b>我们会保存：</b></p>
+  <ul style="margin:0 0 8px 18px;">
+   <li>学生姓名（按此处填写内容保存）</li>
+   <li>所选年级</li>
+   <li>总分与百分比</li>
+   <li>每题结果（正确 / 错误 / 未作答）</li>
+   <li>所使用的示范页面</li>
+  </ul>
+  <p style="margin:0;">
+   <b>我们不会收集</b> 本示范页面上的电子邮箱地址或电话号码。
+  </p>
+  </div>
+ </details>
+
+ <div class="note">
+  想了解个性化学习计划吗？
+  <a href="{{ '/contact.html' | relative_url }}" target="_blank" rel="noopener">立即咨询或在此报名 →</a>
+ </div>
+ </div>
+
+ <!-- PRINT REPORT -->
+ <div id="printReport" class="printReport">
+ <h2>数学练习报告</h2>
+ <p class="small">
+  <b>学生：</b> <span id="rName"></span><br>
+  <b>年级：</b> <span id="rGrade"></span><br>
+  <b>日期：</b> <span id="rDate"></span><br>
+  <b>示范:</b> 学前班–二年级 动物
+ </p>
+
+ <div class="divider"></div>
+
+ <h3>概要</h3>
+ <p id="r概要"></p>
+ <p class="small"><b>未作答：</b> <span id="rUnanswered"></span></p>
+
+ <h3>孩子做得好的地方</h3>
+ <ul id="rStrengths"></ul>
+
+ <h3>下一步建议练习</h3>
+ <ul id="r下一题"></ul>
+
+ <div class="divider"></div>
+
+ <p class="small">
+  这个简短示范并不是考试。它帮助我们规划平和、能建立信心的课程。<br>
+  魔法数学大师 • 澳大利亚 • {{ site.url | default: site.github.url | default: "www.magicmathmaster.com.au" }}
+ </p>
+ </div>
+
+ <div class="footer">魔法数学大师 • 免费示范测试</div>
+</div>
+
+<script>
+/* ================= CONFIG ================= */
+const ENDPOINT_URL =
+ "https://script.google.com/macros/s/AKfycbwvWZJLRflPGQA3s5P2-B5LkTFonS4Z1SPI5-85lzlj1lFY02qXJzTd239PsiB0WICr/exec";
+
+/* ================= QUESTION BANKS (10 each) ================= */
+/*const qs学前班 = [
+ { q:"🐶 Easy: There are 2 puppies at the park. 3 more puppies arrive. How many puppies altogether?", a:5, skill:"Addition" },
+ { q:"🐰 Easy: There are 8 rabbits in a pen. 5 hop away. How many rabbits are left?", a:3, skill:"Subtraction" },
+ { q:"🐤 Easy: There are 4 nests. Each nest has 2 eggs. How many eggs altogether?", a:8, skill:"Multiplication (Groups)" },
+ { q:"🔢 Medium: Counting by 2: 2, 4, 6, __. What number comes next?", a:8, skill:"Patterns" },
+ { q:"🔺 Medium: A triangle is a shape. How many sides does a triangle have?", a:3, skill:"Shapes" },
+ { q:"📈 Medium: Which number is bigger: 17 or 14? (Type the bigger number)", a:17, skill:"Comparing Numbers" },
+ { q:"🐟 Medium: 10 fish are swimming. 3 swim away. How many fish are swimming now?", a:7, skill:"Subtraction" },
+ { q:"🦆 Medium: 6 ducks are in the pond. 2 more ducks join. How many ducks now?", a:8, skill:"Addition" },
+ { q:"🥕 Hard: 12 carrots are shared equally between 3 rabbits. How many carrots does each rabbit get?", a:4, skill:"Division (Sharing)" },
+ { q:"🐾 Hard: 5 puppies are playing. 4 more come. Then 3 leave. How many puppies are there now?", a:6, skill:"Two-Step Problems" }
+];*/
+const qs学前班 = [
+ { q:"🐶 Easy: There are 2 puppies at the park. 3 more puppies arrive. How many puppies altogether?", a:5, skill:"Addition" },
+ { q:"🐰 Easy: There are 8 rabbits in a pen. 5 hop away. How many rabbits are left?", a:3, skill:"Subtraction" },
+ { q:"🍎 Easy: You have 6 apples. You get 2 more apples. How many apples altogether?", a:8, skill:"Addition" },
+
+ { q:"🔟 Medium: What number comes after 8?", a:9, skill:"Number Order" },
+ { q:"🔙 Medium: What number comes before 9?", a:8, skill:"Number Order" },
+ { q:"📈 Medium: Which number is bigger: 7 or 4? (Type the bigger number)", a:7, skill:"Comparing Numbers" },
+ { q:"🔢 Medium: Counting by 2: 2, 4, 6, __. What number comes next?", a:8, skill:"Patterns" },
+
+ { q:"➕ Hard: Missing number: __ + 6 = 10. What is the missing number?", a:4, skill:"Missing Number" },
+ { q:"🐾 Hard: One dog has 4 legs. Another dog has 4 legs. How many legs altogether?", a:8, skill:"Addition (Counting Legs)" },
+ { q:"🐾 Hard: 5 puppies are playing. 4 more come. Then 3 leave. How many puppies are there now?", a:6, skill:"Two-Step Problems" }
+];
+const qsY1 = [
+ { q:"🐶 Easy: An animal rescue has 14 dogs and 9 cats. How many animals altogether?", a:23, skill:"Addition" },
+ { q:"🦜 Easy: 25 birds are sitting on a fence. 8 birds fly away. How many birds are left?", a:17, skill:"Subtraction" },
+ { q:"🐤 Easy: There are 5 cages. Each cage has 3 birds. How many birds altogether?", a:15, skill:"Multiplication (Groups)" },
+ { q:"🔢 Medium: Counting by 5: 15, 20, 25, __. What comes next?", a:30, skill:"Patterns" },
+ { q:"➕ Medium: A child has some stickers. After getting 6 more, they have 20. How many did they have at first?", a:14, skill:"Missing Number" },
+ { q:"📉 Medium: Which number is smaller: 38 or 41? (Type the smaller number)", a:38, skill:"Comparing Numbers" },
+ { q:"🍪 Medium: 30 treats are shared equally between 5 dogs. How many treats does each dog get?", a:6, skill:"Division (Sharing)" },
+ { q:"🥚 Medium: Half of 18 eggs is __. How many eggs is that?", a:9, skill:"Fractions (Halves)" },
+ { q:"💰 Hard: A toy costs $7. You pay with $12. How much change do you get?", a:5, skill:"Money" },
+ { q:"🐰 Hard: 16 rabbits are in a field. 5 more arrive. Then 9 hop away. How many rabbits are there now?", a:12, skill:"Two-Step Problems" }
+];
+
+const qsY2 = [
+ { q:"🦊 Easy: A wildlife shelter has 47 animals. Then 28 more animals arrive. How many animals are there altogether?", a:75, skill:"Addition" },
+ { q:"🦉 Easy: There are 63 fish in a pond. 27 swim away. How many fish are left?", a:36, skill:"Subtraction" },
+ { q:"🐾 Easy: There are 8 packs. Each pack has 7 stickers. How many stickers altogether?", a:56, skill:"Multiplication (Groups)" },
+ { q:"🎒 Medium: 84 soccer balls are shared equally into 6 bags. How many balls per bag?", a:14, skill:"Division (Sharing)" },
+ { q:"🍏 Medium: 3/4 of 28 apples were used. How many apples were used?", a:21, skill:"Fractions (Of a Number)" },
+ { q:"⏱️ Medium: 开始s at 2:10 pm and lasts 35 minutes. 完成 time? (Type HHMM, e.g., 2:45 pm = 245)", a:245, note:"答案 tip: type time as HHMM (e.g., 2:45 pm = 245).", skill:"Time" },
+ { q:"📏 Medium: A rectangle is 9 cm long and 5 cm wide. What is the perimeter (cm)?", a:28, skill:"Measurement (Perimeter)" },
+ { q:"🔟 Medium: Place value: What is the value of the digit 6 in 4,682?", a:600, skill:"Place Value" },
+ { q:"🚌 Hard: 3 buses bring 24 students each. 15 students leave early. How many students stay?", a:57, skill:"Two-Step Problems" },
+ { q:"🧮 Hard: You have 120 animal cards. Give away 35, get 18 more, then give away 22. How many cards now?", a:81, skill:"Two-Step Problems" }
+];
+/* ================= STATE ================= */
+let qs = [];
+let i = -1;
+let score = 0;
+let student = { name:"", grade:"" };
+let got正确 = [];
+let ansCache = [];
+let checkedThisView = false;
+
+const el = id => document.getElementById(id);
+
+/* ================= NAV ================= */
+function goTo示范首页(){
+ window.location.href = "{{ '/cn/demo/' | relative_url }}";
+}
+
+/* ================= START READINESS ================= */
+function validate开始(){
+ const nameOk = el("studentName").value.trim().length > 0;
+ const gradeOk = !!el("studentGrade").value;
+
+ const btn = el("startBtn");
+ btn.disabled = !(nameOk && gradeOk);
+
+ el("gradeHint").textContent = gradeOk ? `Selected: ${el("studentGrade").value}` : "请选择学前班、一年级或二年级。";
+
+ // ✅ When ready, focus 开始 so 回车键 starts immediately
+ if(!btn.disabled){
+ setTimeout(()=>btn.focus(), 0);
+ }
+}
+
+/* ================= PARSERS ================= */
+function parseNumber(raw){
+ const s = (raw || "").trim().replace(/,/g,"").replace(/\s+/g,"");
+ if(!s) return NaN;
+ const v = Number(s);
+ return Number.isFinite(v) ? v : NaN;
+}
+function close(a,b,eps=1e-9){ return Math.abs(a-b) < eps; }
+
+/* ================= ANSWER CACHE ================= */
+function stash答案(){
+ if(i >= 0 && i < ansCache.length){
+ ansCache[i] = el("ans").value;
+ }
+}
+function is答案ed(idx){
+ return ((ansCache[idx] || "").trim() !== "");
+}
+function getUnanswered(){
+ const miss = [];
+ for(let k=0;k<qs.length;k++){
+ if(!is答案ed(k)) miss.push(k+1);
+ }
+ return miss;
+}
+
+/* ================= GRADING ================= */
+function gradeOne(idx){
+ const qObj = qs[idx];
+ if(!qObj) return null;
+ if(!is答案ed(idx)) return null;
+
+ const user = parseNumber(ansCache[idx]);
+ if(!Number.isFinite(user)) return false;
+
+ return close(user, qObj.a);
+}
+function autoGradeAll(){
+ score = 0;
+ got正确 = new Array(qs.length).fill(false);
+ for(let k=0;k<qs.length;k++){
+ const r = gradeOne(k);
+ if(r === true){
+  got正确[k] = true;
+  score++;
+ }
+ }
+}
+function autoGradeIndex(idx){
+ const r = gradeOne(idx);
+ if(r === null) return;
+
+ const newVal = (r === true);
+ if(newVal && !got正确[idx]) score++;
+ if(!newVal && got正确[idx]) score--;
+ got正确[idx] = newVal;
+}
+
+/* ================= UI HELPERS ================= */
+function updatePrecisionNote(){
+ const noteEl = el("precisionNote");
+ const qObj = qs[i];
+ noteEl.textContent = (qObj && qObj.note) ? qObj.note : "";
+}
+function renderCurrentQuestion(){
+ checkedThisView = false;
+
+ el("fb").textContent = "";
+ el("fb").className = "";
+ el("hint").textContent = "";
+
+ el("qCounter").textContent = `Question ${i+1} of ${qs.length}`;
+ el("q").textContent = qs[i].q;
+
+ el("ans").value = ansCache[i] ?? "";
+ updatePrecisionNote();
+
+ el("prevBtn").disabled = (i <= 0);
+ el("ans").focus();
+}
+
+/* ================= FLOW ================= */
+function start(){
+ student.name = el("studentName").value.trim();
+ student.grade = el("studentGrade").value;
+
+ if(!student.name){ alert("Please enter the student name."); return; }
+ if(!student.grade){ alert("请选择 a year level."); return; }
+
+ if(student.grade === "学前班") qs = qs学前班;
+ else if(student.grade === "一年级") qs = qsY1;
+ else qs = qsY2;
+
+ got正确 = new Array(qs.length).fill(false);
+ ansCache = new Array(qs.length).fill("");
+
+ i = -1;
+ score = 0;
+
+ el("pill").textContent = `🌱 ${student.grade} • 动物`;
+ el("titleH1").textContent = `动物数学练习 (免费示范测试 — ${student.grade})`;
+
+ el("profileBox").style.display = "none";
+ el("startButtons").style.display = "none";
+ el("startMsg").style.display = "none";
+
+ el("qa").style.display = "block";
+ el("qa").classList.remove("hide");
+ el("end").classList.add("hide");
+
+ next();
+}
+
+function next(){
+ stash答案();
+ if(i >= 0) autoGradeIndex(i);
+
+ if(i >= qs.length - 1){
+ finishEarly();
+ return;
+ }
+
+ i++;
+ renderCurrentQuestion();
+}
+
+function prev(){
+ if(i <= 0) return;
+ stash答案();
+ autoGradeIndex(i);
+ i--;
+ renderCurrentQuestion();
+}
+
+function check(){
+ if(i < 0) return;
+
+ stash答案();
+
+ const box = el("fb");
+ el("hint").textContent = "";
+
+ const user = parseNumber(ansCache[i]);
+
+ if(!Number.isFinite(user)){
+ box.className = "feedback bad";
+ box.textContent = "Please type a number.";
+ checkedThisView = true;
+ return;
+ }
+
+ const okNow = close(user, qs[i].a);
+
+ if(okNow){
+ box.className = "feedback ok";
+ box.textContent = "✅ 正确!";
+ }else{
+ box.className = "feedback bad";
+ box.textContent = "❌ Not quite.";
+ el("hint").textContent = "Tip: 再试一次 step by step.";
+ }
+
+ if(okNow && !got正确[i]) score++;
+ if(!okNow && got正确[i]) score--;
+ got正确[i] = okNow;
+
+ checkedThisView = true;
+}
+
+function finishEarly(){
+ stash答案();
+ autoGradeAll();
+
+ const miss = getUnanswered();
+ if(miss.length){
+ const preview = miss.slice(0,12).map(n=>`Q${n}`).join(", ");
+ const suffix = miss.length > 12 ? ` (+${miss.length-12} more)` : "";
+ const ok = confirm(`You still have unanswered questions: ${preview}${suffix}.\n\n完成 anyway?`);
+ if(!ok){
+  i = miss[0]-1;
+  renderCurrentQuestion();
+  return;
+ }
+ }
+ finish();
+}
+
+function finish(){
+ stash答案();
+ autoGradeAll();
+
+ el("qa").style.display = "none";
+ el("end").classList.remove("hide");
+ el("precisionNote").textContent = "";
+
+ const pct = Math.round(score / qs.length * 100);
+ const miss = getUnanswered();
+
+ el("finalLine").textContent = `分数: ${score}/${qs.length} (${pct}%) • 未作答： ${miss.length}`;
+ el("pctText").textContent = `Percentage correct: ${pct}%`;
+
+ const states = qs.map((_,idx)=>{
+ if(got正确[idx]) return 1;
+ return is答案ed(idx) ? 0 : -1;
+ });
+
+ drawChart(states);
+ buildStudent概要();
+ buildParent概要();
+ saveResult(pct);
+}
+
+/* ================= CHART ================= */
+function drawChart(states){
+ const c = el("chart"), ctx = c.getContext("2d");
+ ctx.clearRect(0,0,c.width,c.height);
+
+ const W=c.width, H=c.height;
+ const L=52, R=18, T=18, B=45;
+ const n=states.length;
+ const chartW=W-L-R, chartH=H-T-B;
+
+ ctx.strokeStyle="#111827";
+ ctx.lineWidth=2;
+ ctx.beginPath();
+ ctx.moveTo(L,T);
+ ctx.lineTo(L,H-B);
+ ctx.lineTo(W-R,H-B);
+ ctx.stroke();
+
+ const gap=12;
+ const barW=Math.max(24, (chartW - gap*(n-1))/n);
+
+ const incorrectH = 18;
+ const unansweredH = 18;
+
+ states.forEach((s,i)=>{
+ const x=L + i*(barW+gap);
+
+ if(s === 1){
+  const barH = chartH;
+  const y = (H-B) - barH;
+  ctx.fillStyle = "rgba(11,94,215,.85)";
+  ctx.fillRect(x,y,barW,barH);
+  ctx.fillStyle="#111827";
+  ctx.font="13px system-ui";
+  ctx.fillText("✔", x+barW/2-4, y-6);
+
+ }else if(s === 0){
+  const barH = incorrectH;
+  const y = (H-B) - barH;
+  ctx.fillStyle = "rgba(239,68,68,.75)";
+  ctx.fillRect(x,y,barW,barH);
+  ctx.fillStyle="#111827";
+  ctx.font="13px system-ui";
+  ctx.fillText("✘", x+barW/2-4, y-6);
+
+ }else{
+  const barH = unansweredH;
+  const y = (H-B) - barH;
+  ctx.strokeStyle = "rgba(148,163,184,.95)";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(x,y,barW,barH);
+  ctx.fillStyle="#111827";
+  ctx.font="13px system-ui";
+  ctx.fillText("U", x+barW/2-4, y-6);
+ }
+
+ ctx.fillStyle="#111827";
+ ctx.font="12px system-ui";
+ ctx.fillText(`Q${i+1}`, x+6, H-B+18);
+ });
+}
+
+/* ================= STUDENT SUMMARY ================= */
+function buildStudent概要(){
+ const pct = Math.round(score / qs.length * 100);
+ const unanswered = getUnanswered();
+
+ let msg = "";
+ if(pct >= 85) msg = "🌟 Awesome work! You got lots of questions right.";
+ else if(pct >= 60) msg = "👍 Good effort! Keep practising and you’ll improve quickly.";
+ else msg = "🌱 Nice try! A little practice each day makes a big difference.";
+
+ if(unanswered.length) msg += ` You left ${unanswered.length} unanswered — try those next time.`;
+
+ el("studentOverview").textContent = msg;
+
+ const skillStats = {};
+ qs.forEach((item, idx)=>{
+ if(!skillStats[item.skill]) skillStats[item.skill] = { total:0, correct:0 };
+ skillStats[item.skill].total++;
+ if(got正确[idx]) skillStats[item.skill].correct++;
+ });
+
+ const skillsSorted = Object.entries(skillStats)
+ .map(([skill, s])=>({ skill, rate: s.correct / s.total }))
+ .sort((a,b)=> b.rate - a.rate);
+
+ const strengths = skillsSorted.filter(x=>x.rate >= 0.75).slice(0,2);
+ const nextSteps = skillsSorted.filter(x=>x.rate < 0.75).slice(0,2);
+
+ el("studentWellList").innerHTML = strengths.length
+ ? strengths.map(x=>`<li><b>${x.skill}</b> — great job!</li>`).join("")
+ : "<li>Trying your best — that’s a great learning skill.</li>";
+
+ el("student下一题List").innerHTML = nextSteps.length
+ ? nextSteps.map(x=>`<li><b>${x.skill}</b> — practise a few more examples.</li>`).join("")
+ : "<li>Keep practising to build confidence.</li>";
+}
+
+/* ================= PARENT SUMMARY ================= */
+function buildParent概要(){
+ // Unanswered list (by question number)
+ const unanswered = [];
+ for(let k=0;k<qs.length;k++){
+ if(!is答案ed(k)) unanswered.push(k+1);
+ }
+ el("unansweredLine").textContent = unanswered.length
+ ? unanswered.map(n=>`Q${n}`).join(", ")
+ : "None ✅";
+
+ // Build skill stats
+ const skillStats = {}; // { skill: { total, correct } }
+ qs.forEach((item, idx)=>{
+ const sk = item.skill || "Other";
+ if(!skillStats[sk]) skillStats[sk] = { total:0, correct:0 };
+ skillStats[sk].total++;
+ if(got正确[idx]) skillStats[sk].correct++;
+ });
+
+ // Overall overview text
+ const pct = Math.round(score / qs.length * 100);
+ let overview = "";
+ if(pct >= 85) overview = "🌟 Strong work! Your child showed confident understanding across many skills today.";
+ else if(pct >= 60) overview = "👍 Good progress. Your child is developing confidence, with a few skills to strengthen next.";
+ else overview = "🌱 Still building confidence — very normal. With steady practice, accuracy improves quickly.";
+ el("parentOverview").textContent = overview;
+
+ // Sort skills by accuracy
+ const skillsSorted = Object.entries(skillStats)
+ .map(([skill, s])=>({
+  skill,
+  correct: s.correct,
+  total: s.total,
+  rate: s.total ? (s.correct / s.total) : 0
+ }))
+ .sort((a,b)=>{
+  if(b.rate !== a.rate) return b.rate - a.rate;
+  return b.total - a.total;
+ });
+
+ // Choose strengths + focus areas
+ const strengths = skillsSorted.filter(x=>x.rate >= 0.75).slice(0,3);
+ const focus  = skillsSorted.filter(x=>x.rate < 0.75).slice(0,3);
+
+ // Render strengths
+ el("strengthList").innerHTML = strengths.length
+ ? strengths.map(x=>{
+  const pctSkill = Math.round(x.rate * 100);
+  return `<li><b>${x.skill}</b> — ${x.correct}/${x.total} correct (${pctSkill}%)</li>`;
+  }).join("")
+ : "<li>Great effort and persistence — an important learning skill.</li>";
+
+ // Render next steps (include unanswered reminder first)
+ const unansweredItem = unanswered.length
+ ? `<li><b>完成 unanswered questions first:</b> ${unanswered.map(n=>`Q${n}`).join(", ")}</li>`
+ : "";
+
+ const focusItems = focus.length
+ ? focus.map(x=>{
+  const pctSkill = Math.round(x.rate * 100);
+  return `<li><b>${x.skill}</b> — ${x.correct}/${x.total} correct (${pctSkill}%). Practise a few more examples.</li>`;
+  }).join("")
+ : "<li>Keep practising to build speed and confidence.</li>";
+
+ el("nextList").innerHTML = unansweredItem + focusItems;
+}
+/* ================= PRINT REPORT ================= */
+function printOrSkip(){
+ const include = el("includeReport").checked;
+ if(!include){
+ alert("Report is turned off. Tick 'Include a printable report' if you want to print/save a 电子文档.");
+ return;
+ }
+ buildPrintReport();
+ window.print();
+}
+
+function buildPrintReport(){
+ const pct = Math.round(score / qs.length * 100);
+ const unanswered = getUnanswered();
+ const results01 = got正确.map(v=>v?1:0);
+
+ // Header
+ el("rName").textContent = student.name;
+ el("rGrade").textContent = student.grade || "—";
+ el("rDate").textContent = new Date().toLocaleDateString();
+
+ // 概要 line
+ el("r概要").textContent =
+ `分数: ${score}/${qs.length} (${pct}%). ` +
+ (pct>=85 ? "Strong understanding across many skills."
+  : pct>=60 ? "Developing understanding with some areas to strengthen."
+  : "Still building confidence — very normal at this stage.");
+
+ // Unanswered
+ el("rUnanswered").textContent = unanswered.length
+ ? unanswered.map(n=>`Q${n}`).join(", ")
+ : "None";
+
+ // Skill stats (same logic as Parent 概要)
+ const skillStats = {};
+ qs.forEach((item, idx)=>{
+ const sk = item.skill || "Other";
+ if(!skillStats[sk]) skillStats[sk] = { total:0, correct:0 };
+ skillStats[sk].total++;
+ if(got正确[idx]) skillStats[sk].correct++;
+ });
+
+ const skillsSorted = Object.entries(skillStats)
+ .map(([skill, s])=>({
+  skill,
+  correct: s.correct,
+  total: s.total,
+  rate: s.total ? (s.correct / s.total) : 0
+ }))
+ .sort((a,b)=>{
+  if(b.rate !== a.rate) return b.rate - a.rate;
+  return b.total - a.total;
+ });
+
+ const strengths = skillsSorted.filter(x=>x.rate >= 0.75).slice(0,3);
+ const focus  = skillsSorted.filter(x=>x.rate < 0.75).slice(0,3);
+
+ // Strengths list (skills)
+ el("rStrengths").innerHTML = strengths.length
+ ? strengths.map(x=>{
+  const pctSkill = Math.round(x.rate * 100);
+  return `<li><b>${x.skill}</b> — ${x.correct}/${x.total} correct (${pctSkill}%)</li>`;
+  }).join("")
+ : "<li>Great effort and persistence.</li>";
+
+ // 下一题 steps list (unanswered + focus skills)
+ const unansweredItem = unanswered.length
+ ? `<li><b>完成 unanswered questions first:</b> ${unanswered.map(n=>`Q${n}`).join(", ")}</li>`
+ : "";
+
+ const focusItems = focus.length
+ ? focus.map(x=>{
+  const pctSkill = Math.round(x.rate * 100);
+  return `<li><b>${x.skill}</b> — ${x.correct}/${x.total} correct (${pctSkill}%). Practise a few more examples.</li>`;
+  }).join("")
+ : "<li>Keep practising to build confidence.</li>";
+
+ el("r下一题").innerHTML = unansweredItem + focusItems;
+}
+
+/* ================= SAVE TO SHEET ================= */
+async function saveResult(pct){
+ el("saveStatus").textContent = "Saving your result to 魔法数学大师 records…";
+
+ const answers = qs.map((_, idx) => {
+ if (got正确[idx]) return 1;
+ return is答案ed(idx) ? 0 : -1;
+ });
+
+ try{
+ await fetch(ENDPOINT_URL,{
+  method:"POST",
+  mode:"no-cors",
+  headers:{ "Content-Type":"text/plain;charset=utf-8" },
+  body:JSON.stringify({
+  group:"学前班–2",
+  level: student.grade,
+  theme:"动物",
+  name: student.name,
+  grade: student.grade,
+  score: score,
+  total: qs.length,
+  percent: pct,
+
+  answers: answers,
+  unansweredQs: getUnanswered(),
+
+  perQuestion01: got正确.map(v=>v?1:0),
+
+  pageUrl: location.href,
+  userAgent: navigator.userAgent
+  })
+ });
+
+ el("saveStatus").textContent = "✅ Saved to 魔法数学大师 records (no email sent).";
+ }catch(e){
+ el("saveStatus").textContent = "⚠️ Could not save right now (no email sent).";
+ }
+}
+
+/* ================= CHANGE GRADE ================= */
+function backToGrade(){
+ qs = [];
+ got正确 = [];
+ ansCache = [];
+ i = -1;
+ score = 0;
+
+ el("fb").textContent = "";
+ el("fb").className = "";
+ el("hint").textContent = "";
+ el("ans").value = "";
+ el("precisionNote").textContent = "";
+
+ el("qa").classList.add("hide");
+ el("qa").style.display = "none";
+ el("end").classList.add("hide");
+
+ el("profileBox").style.display = "block";
+ el("startButtons").style.display = "flex";
+ el("startMsg").style.display = "block";
+
+ el("studentGrade").value = "";
+ el("pill").textContent = "🌱 学前班–二年级 • 动物";
+ el("titleH1").textContent = "动物数学练习 (免费示范测试)";
+
+ validate开始();
+ el("studentName").focus();
+}
+
+/* ================= RESET ================= */
+function restart(){ location.reload(); }
+
+/* ================= LISTENERS ================= */
+document.addEventListener("DOMContentLoaded", () => {
+ validate开始();
+ el("studentName").addEventListener("input", validate开始);
+ el("studentGrade").addEventListener("change", validate开始);
+
+ el("ans").addEventListener("input", () => {
+ if(i >= 0 && i < ansCache.length){
+  ansCache[i] = el("ans").value;
+ }
+ checkedThisView = false;
+ });
+});
+
+/* ================= KEYBOARD =================
+ 开始 screen: 回车键 = 开始 (when ready)
+ Quiz:
+  回车键 ＝ 检查，然后 回车键 again = 下一题
+  组合键回车 = 上一题
+  快捷键回车 = 下一题 （跳过检查）
+*/
+document.addEventListener("keydown", (e) => {
+ if (e.key !== "回车键") return;
+
+ const quizVisible =
+ !el("qa").classList.contains("hide") && el("qa").style.display !== "none";
+
+ const startVisible =
+ el("profileBox").style.display !== "none" &&
+ el("startButtons").style.display !== "none";
+
+ // ✅ 开始 screen 回车键 -> 开始
+ if(!quizVisible && startVisible){
+ const btn = el("startBtn");
+ if(btn && !btn.disabled){
+  e.preventDefault();
+  start();
+ }
+ return;
+ }
+
+ // ✅ Quiz keys
+ if(!quizVisible) return;
+
+ e.preventDefault();
+
+ if (e.shiftKey) { prev(); return; }
+ if (e.ctrlKey || e.metaKey) { next(); return; }
+
+ if (checkedThisView) next();
+ else check();
+});
+</script>
